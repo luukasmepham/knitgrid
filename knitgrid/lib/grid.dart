@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'columns.dart';
-import 'rows.dart';
+import 'values.dart';
+import 'cell.dart';
 
 class Grid extends StatefulWidget {
   @override
-  _GridState createState() => _GridState();
+  State<StatefulWidget> createState() => _GridState();
 }
 
 class _GridState extends State<Grid> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Columns(),
-        Expanded(
-          child: Rows(),
-        ),
-      ],
+    return GridView.count(
+      crossAxisCount: sizeOfGrid,
+      children: List.generate(sizeOfGrid * sizeOfGrid, (index) {
+        return Cell(
+          color: Colors.white,
+        );
+      }),
     );
   }
 }

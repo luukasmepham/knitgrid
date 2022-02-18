@@ -1,1 +1,2 @@
-const int maxNumber = 20;
+const int sizeOfGrid = 20;
+const double sizeOfCell = 10;
