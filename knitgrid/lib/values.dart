@@ -1,2 +1,2 @@
 const int sizeOfGrid = 20;
-const double sizeOfCell = 10;
+const double sizeOfCell = 50;
