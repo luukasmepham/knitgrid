@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'grid_app.dart';
+import 'grid/grid.dart';
 
 void main() {
   runApp(const App());
@@ -19,7 +19,7 @@ class App extends StatelessWidget {
         appBar: AppBar(
           title: const Text(title),
         ),
-        body: Grid_App(),
+        body: Grid(),
       ),
     );
   }
