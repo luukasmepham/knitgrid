@@ -15,38 +15,33 @@ class _GridState extends State<Grid> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        width: MediaQuery.of(context).size.width > 1000
-            ? MediaQuery.of(context).size.width * 0.5
-            : 500,
-        child: Column(children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.05,
-            color: Colors.white,
-            child: Slider(
-              value: _currentSliderValue,
-              max: 20,
-              min: 2,
-              divisions: 18,
-              label: _currentSliderValue.round().toString(),
-              onChanged: (double value) {
-                setState(() {
-                  _currentSliderValue = value;
-                  sizeOfGrid = value;
-                });
-              },
-            ),
+      child: Column(children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.05,
+          color: Colors.white,
+          child: Slider(
+            value: _currentSliderValue,
+            max: 24,
+            min: 2,
+            divisions: 22,
+            label: _currentSliderValue.round().toString(),
+            onChanged: (double value) {
+              setState(() {
+                _currentSliderValue = value;
+                sizeOfGrid = value;
+              });
+            },
           ),
-          Top(
+        ),
+        Top(
+          sizeOfGrid: sizeOfGrid,
+        ),
+        Expanded(
+          child: Body(
             sizeOfGrid: sizeOfGrid,
           ),
-          Expanded(
-            child: Body(
-              sizeOfGrid: sizeOfGrid,
-            ),
-          ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 }

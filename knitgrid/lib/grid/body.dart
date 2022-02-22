@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 import 'cell.dart';
 
@@ -13,6 +14,25 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  late LinkedScrollControllerGroup _controllers;
+  late ScrollController _left;
+  late ScrollController _grid;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers = LinkedScrollControllerGroup();
+    _left = _controllers.addAndGet();
+    _grid = _controllers.addAndGet();
+  }
+
+  @override
+  void dispose() {
+    _left.dispose();
+    _grid.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double sizeOfGrid = widget.sizeOfGrid;
@@ -23,6 +43,7 @@ class _BodyState extends State<Body> {
             width: MediaQuery.of(context).size.width * 0.06,
             color: Colors.white,
             child: ListView.builder(
+              controller: _left,
               scrollDirection: Axis.vertical,
               itemCount: sizeOfGrid.toInt(),
               itemBuilder: (context, i) {
@@ -42,6 +63,7 @@ class _BodyState extends State<Body> {
           ),
           Expanded(
             child: GridView.count(
+              controller: _grid,
               crossAxisCount: sizeOfGrid.toInt(),
               children: List.generate(sizeOfGrid.toInt() * sizeOfGrid.toInt(),
                   (index) {
