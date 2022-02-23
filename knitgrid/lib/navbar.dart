@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'grid/grid.dart';
 import 'counter/counter.dart';
-import 'feed/feed.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -15,7 +14,6 @@ class _NavbarState extends State<Navbar> {
   List<Widget> _widgetOptions = <Widget>[
     Grid(),
     Counter(),
-    Feed(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -38,10 +36,6 @@ class _NavbarState extends State<Navbar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.calculate),
             label: 'Counter',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
-            label: 'Feed',
           ),
         ],
         currentIndex: _selectedIndex,

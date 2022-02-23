@@ -45,13 +45,13 @@ class _BodyState extends State<Body> {
             child: ListView.builder(
               controller: _left,
               scrollDirection: Axis.vertical,
-              itemCount: sizeOfGrid.toInt(),
+              itemCount: sizeOfGrid.toInt() * 2,
               itemBuilder: (context, i) {
                 i = i + 1;
                 return Container(
                   color: Colors.white,
                   height: (MediaQuery.of(context).size.width -
-                          (0.06 * MediaQuery.of(context).size.width)) /
+                          (0.09 * MediaQuery.of(context).size.width)) /
                       sizeOfGrid,
                   child: Align(
                     alignment: Alignment.center,
@@ -65,8 +65,9 @@ class _BodyState extends State<Body> {
             child: GridView.count(
               controller: _grid,
               crossAxisCount: sizeOfGrid.toInt(),
-              children: List.generate(sizeOfGrid.toInt() * sizeOfGrid.toInt(),
-                  (index) {
+              children: List.generate(
+                  sizeOfGrid.toInt() *
+                      (sizeOfGrid.toInt() + sizeOfGrid.toInt()), (index) {
                 return Cell();
               }),
             ),

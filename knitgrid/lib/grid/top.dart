@@ -39,7 +39,7 @@ class _TopState extends State<Top> {
                 return Container(
                   color: Colors.white,
                   width: (MediaQuery.of(context).size.width -
-                          (0.06 * MediaQuery.of(context).size.width)) /
+                          (0.09 * MediaQuery.of(context).size.width)) /
                       sizeOfGrid,
                   child: Align(
                     alignment: Alignment.center,
