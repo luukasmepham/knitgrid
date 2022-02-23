@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'navbar.dart';
@@ -14,10 +16,21 @@ class App extends StatelessWidget {
     const title = 'Knitgrid';
 
     return MaterialApp(
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+          PointerDeviceKind.stylus,
+          PointerDeviceKind.unknown
+        },
+        scrollbars: false,
+      ),
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(title),
+          title: const Text(
+            title,
+          ),
         ),
         body: Navbar(),
       ),
