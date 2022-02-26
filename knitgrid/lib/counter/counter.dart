@@ -21,15 +21,11 @@ class _CounterState extends State<Counter> {
                 child: Container(
                   color: Colors.blue,
                   width: 50,
-                  child: const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      '-',
-                      style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                      ),
-                    ),
+                  child: const Icon(
+                    Icons.remove,
+                    color: Colors.white,
+                    size: 30.0,
+                    semanticLabel: 'Substraction',
                   ),
                 ),
                 onPressed: () => setState(
@@ -44,6 +40,7 @@ class _CounterState extends State<Counter> {
                       '$counter',
                       style: const TextStyle(
                         fontSize: 50,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
@@ -53,15 +50,11 @@ class _CounterState extends State<Counter> {
                 child: Container(
                   color: Colors.blue,
                   width: 50,
-                  child: const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      '+',
-                      style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                      ),
-                    ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 30.0,
+                    semanticLabel: 'Add',
                   ),
                 ),
                 onPressed: () => setState(

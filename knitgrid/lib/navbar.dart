@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'grid/grid.dart';
+import 'grid/layout/tools.dart';
 import 'counter/counter.dart';
+import 'gallery/gallery.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -10,14 +11,15 @@ class Navbar extends StatefulWidget {
 }
 
 class _NavbarState extends State<Navbar> {
-  int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    Grid(),
-    Counter(),
+  int selection = 0;
+  final List<Widget> pages = <Widget>[
+    Tools(),
+    const Counter(),
+    Gallery(),
   ];
-  void _onItemTapped(int index) {
+  void onTap(int index) {
     setState(() {
-      _selectedIndex = index;
+      selection = index;
     });
   }
 
@@ -25,7 +27,7 @@ class _NavbarState extends State<Navbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: pages.elementAt(selection),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -37,10 +39,14 @@ class _NavbarState extends State<Navbar> {
             icon: Icon(Icons.calculate),
             label: 'Counter',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Gallery',
+          ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selection,
         selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+        onTap: onTap,
       ),
     );
   }
