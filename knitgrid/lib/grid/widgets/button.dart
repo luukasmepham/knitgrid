@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colorStatus.dart';
+import '../../values.dart';
 
 class Button extends StatefulWidget {
   var color;
@@ -27,15 +27,13 @@ class _ButtonState extends State<Button> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: MaterialButton(
-        padding: EdgeInsets.zero,
-        onPressed: () {
-          value = colorValue;
-        },
-        child: Container(
-          color: color,
-        ),
+    return MaterialButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        selectedColor = colorValue;
+      },
+      child: Container(
+        color: color,
       ),
     );
   }

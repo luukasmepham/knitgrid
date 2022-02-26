@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Top extends StatefulWidget {
-  late double sizeOfGrid;
+import '../../values.dart';
 
-  Top({
-    required this.sizeOfGrid,
-  });
+class Top extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _TopState();
 }
@@ -13,7 +10,6 @@ class Top extends StatefulWidget {
 class _TopState extends State<Top> {
   @override
   Widget build(BuildContext context) {
-    double sizeOfGrid = widget.sizeOfGrid;
     return Container(
       height: MediaQuery.of(context).size.height * 0.03,
       child: Row(children: [
@@ -37,7 +33,13 @@ class _TopState extends State<Top> {
               itemBuilder: (context, i) {
                 i = i + 1;
                 return Container(
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 0.1,
+                    ),
+                  ),
                   width: (MediaQuery.of(context).size.width -
                           (0.09 * MediaQuery.of(context).size.width)) /
                       sizeOfGrid,
