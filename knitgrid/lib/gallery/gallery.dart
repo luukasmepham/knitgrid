@@ -22,67 +22,74 @@ class _GalleryState extends State<Gallery> {
       width: MediaQuery.of(context).size.width,
       child: Center(
         child: Column(children: [
-          StreamBuilder<QuerySnapshot>(
-            stream: repository.getStream(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final List<DocumentSnapshot> documents = snapshot.data!.docs;
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.85,
-                  width: MediaQuery.of(context).size.width * 0.425,
-                  child: ListView.builder(
-                      itemCount: documents.length,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot doc = documents[index];
-                        Saves newSave = Saves(doc['name'],
-                            gridToStorage: doc['grid'],
-                            currentValue: doc['slider'],
-                            sizeOfGrid: doc['size'],
-                            totalSizeOfGrid: doc['totalSize']);
+          Text('Tap the grid you would like to load'),
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: repository.getStream(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final List<DocumentSnapshot> documents = snapshot.data!.docs;
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.85,
+                    width: 300, //MediaQuery.of(context).size.width * 0.425,
+                    child: ListView.builder(
+                        primary: true,
+                        shrinkWrap: true,
+                        itemCount: documents.length,
+                        itemBuilder: (context, index) {
+                          DocumentSnapshot doc = documents[index];
+                          Saves newSave = Saves(doc['name'],
+                              gridToStorage: doc['grid'],
+                              currentValue: doc['slider'],
+                              sizeOfGrid: doc['size'],
+                              totalSizeOfGrid: doc['totalSize']);
 
-                        String name = newSave.nameToStorage;
-                        List<dynamic> grid = newSave.gridToStorage;
-                        double sizeGrid = newSave.sizeOfGrid;
-                        int gridSize = sizeGrid.toInt();
-                        double slider = newSave.currentValue;
+                          String name = newSave.nameToStorage;
+                          List<dynamic> grid = newSave.gridToStorage;
+                          double sizeGrid = newSave.sizeOfGrid;
+                          int gridSize = sizeGrid.toInt();
+                          double slider = newSave.currentValue;
 
-                        return Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          child: Center(
-                            child: Column(children: [
-                              Text(name),
-                              Expanded(
-                                child: GridView.count(
-                                  crossAxisCount: gridSize,
-                                  children: List.generate(
-                                      gridSize * (gridSize + gridSize),
-                                      (index) {
-                                    return MaterialButton(
-                                      padding: EdgeInsets.all(0),
-                                      onPressed: () {
-                                        savedGrid = grid;
-                                        currentValue = slider;
-                                        totalGridSize = gridSize;
-                                        sizeOfGrid = sizeGrid;
-                                        nameOfSave = name;
-                                      },
-                                      child: GalleryCell(
-                                        colorIndex: grid[index],
-                                      ),
-                                    );
-                                  }),
+                          return Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                              child: Column(children: [
+                                Text(name),
+                                Expanded(
+                                  child: GridView.count(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    crossAxisCount: gridSize,
+                                    children: List.generate(
+                                        gridSize * (gridSize + gridSize),
+                                        (index) {
+                                      return MaterialButton(
+                                        padding: EdgeInsets.all(0),
+                                        onPressed: () {
+                                          savedGrid = grid;
+                                          currentValue = slider;
+                                          totalGridSize = gridSize;
+                                          sizeOfGrid = sizeGrid;
+                                          nameOfSave = name;
+                                        },
+                                        child: GalleryCell(
+                                          colorIndex: grid[index],
+                                        ),
+                                      );
+                                    }),
+                                  ),
                                 ),
-                              ),
-                            ]),
-                          ),
-                        );
-                      }),
-                );
-              } else {
-                return Text('Database is empty');
-              }
-            },
+                              ]),
+                            ),
+                          );
+                        }),
+                  );
+                } else {
+                  return Text('Database is empty');
+                }
+              },
+            ),
           ),
         ]),
       ),
